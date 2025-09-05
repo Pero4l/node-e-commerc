@@ -1,0 +1,72 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse with adjustable DPI.",
+      "instock": 25
+    },
+    {
+      "id": 2,
+      "name": "Mechanical Keyboard",
+      "description": "RGB backlit mechanical keyboard with blue switches.",
+      "instock": 15
+    },
+    {
+      "id": 3,
+      "name": "USB-C Hub",
+      "description": "Multiport USB-C hub with HDMI and Ethernet.",
+      "instock": 30
+    },
+    {
+      "id": 4,
+      "name": "Bluetooth Speaker",
+      "description": "Portable Bluetooth speaker with deep bass.",
+      "instock": 20
+    },
+    {
+      "id": 5,
+      "name": "Webcam",
+      "description": "1080p HD webcam with built-in microphone.",
+      "instock": 18
+    },
+    {
+      "id": 6,
+      "name": "Laptop Stand",
+      "description": "Adjustable aluminum laptop stand for desk.",
+      "instock": 22
+    },
+    {
+      "id": 7,
+      "name": "External SSD",
+      "description": "1TB USB 3.1 external solid state drive.",
+      "instock": 12
+    },
+    {
+      "id": 8,
+      "name": "Noise Cancelling Headphones",
+      "description": "Over-ear headphones with active noise cancellation.",
+      "instock": 10
+    },
+    {
+      "id": 9,
+      "name": "Smartwatch",
+      "description": "Fitness tracking smartwatch with heart rate monitor.",
+      "instock": 14
+    },
+    {
+      "id": 10,
+      "name": "Portable Charger",
+      "description": "10000mAh power bank with fast charging.",
+      "instock": 28
+    }
+  ],
+  "orders": [],
+  "users": [
+    {
+      "role": "admin",
+      "name": "peter",
+      "pin": "1234"
+    }
+  ]
+}
