@@ -29,6 +29,35 @@ function writeItems(data) {
   }
 }
 
+const featuredProducts = () => {
+  const db = readItems(); // use helper
+  const products = db.products;
+
+  console.log(chalk.bold.bgCyan.black("\n FEATURED PRODUCTS \n"));
+
+  console.log(
+    chalk.bold.magenta("ID".padEnd(5)) +
+    chalk.bold.blue("Name".padEnd(25)) +
+    chalk.bold.yellow("Stock".padEnd(10)) +
+    chalk.bold.green("Description\n")
+  );
+
+  // Show only first 3 products
+  const pageItems = products.slice(0, 10);
+
+  pageItems.forEach((p) => {
+    console.log(
+      chalk.magenta(String(p.id).padEnd(5)) +
+      chalk.blue(p.name.padEnd(25)) +
+      chalk.yellow(String(p.instock).padEnd(10)) +
+      chalk.green(p.description)
+    );
+  });
+
+  console.log("\n");
+};
+
+
 // === ADMIN MENU ====
 
 // === 1. Add Product ===
@@ -232,7 +261,7 @@ function login() {
         if (user.role === "admin") {
           adminMenu();
         } else {
-          userMenu();
+          shopMenu();
         }
       });
     });
@@ -245,18 +274,17 @@ function login() {
 // === Shop Menu ===
 function shopMenu() {
     console.log(chalk.cyan("Welcome to the best SHOP"));
+
+    featuredProducts()
     
   console.log(
     chalk.yellow(`
 ===== SHOP MENU =====
 1: Register
 2: Login
-3: See all product
-4: See Single product
-5: Buy product
-6: See product bought
-7: Search for order
-8: Exit
+3: See product bought
+4: Search for order
+5: Exit
   `)
   );
 
@@ -271,7 +299,7 @@ function shopMenu() {
         login();
         break;
       case "3":
-        editProduct();
+        featuredProducts()
         break;
       case "4":
         seeAllOrders();
@@ -294,6 +322,7 @@ function shopMenu() {
 
 // === Admin Menu ===
 function adminMenu() {
+  featuredProducts()
   console.log(
     chalk.yellow(`
 ===== ADMIN MENU =====

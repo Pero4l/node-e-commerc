@@ -67,6 +67,12 @@
       "role": "admin",
       "name": "peter",
       "pin": "1234"
+    },
+    {
+      "role": "user",
+      "name": "ptb",
+      "pin": "1234",
+      "notifications": []
     }
   ]
 }
