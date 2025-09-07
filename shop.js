@@ -338,6 +338,63 @@ function buyProduct() {
   });
 }
 
+function seeProductsBought() {
+  const db = readItems();
+
+  if (!currentUser || currentUser.role !== "user") {
+    console.log(chalk.red("❌ Only users can see their purchased products."));
+    return shopMenu();
+  }
+
+  const myOrders = db.orders.filter((o) => o.buyer === currentUser.name);
+
+  if (myOrders.length === 0) {
+    console.log(chalk.yellow("\n🛒 You have not bought any products yet.\n"));
+  } else {
+    console.log(chalk.bold.bgBlue.white("\n YOUR PURCHASED PRODUCTS \n"));
+
+    myOrders.forEach((order, index) => {
+      console.log(chalk.cyan(`#${index + 1}`));
+      console.log(`Product: ${order.productName}`);
+      console.log(`Quantity: ${order.quantity}`);
+      console.log(`Total: $${order.total}`);
+      console.log(`Status: ${order.status}`);
+      console.log(`Date: ${order.date}\n`);
+    });
+  }
+
+  shopMenu();
+}
+
+
+function searchOrder() {
+  const db = readItems();
+
+  if (!currentUser || currentUser.role !== "user") {
+    console.log(chalk.red("❌ Only users can search their orders."));
+    return shopMenu();
+  }
+
+  rl.question("Enter order ID to search: ", (id) => {
+    const order = db.orders.find(
+      (o) => o.id == id && o.buyer === currentUser.name
+    );
+
+    if (!order) {
+      console.log(chalk.yellow("⚠️ No order found with that ID."));
+    } else {
+      console.log(chalk.bold.bgMagenta.white("\n ORDER DETAILS \n"));
+      console.log(`Order ID: ${order.id}`);
+      console.log(`Product: ${order.productName}`);
+      console.log(`Quantity: ${order.quantity}`);
+      console.log(`Total: $${order.total}`);
+      console.log(`Status: ${order.status}`);
+      console.log(`Date: ${order.date}\n`);
+    }
+
+    shopMenu();
+  });
+}
 
 
 
@@ -474,10 +531,10 @@ function shopMenu() {
         buyProduct();
         break;
       case "4":
-        seeAllOrders();
+        seeProductsBought();
         break;
          case "5":
-        seeAllOrders();
+        searchOrder();
         break;
       case "6":
         seeNotifications();
