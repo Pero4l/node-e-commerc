@@ -30,7 +30,7 @@ function writeItems(data) {
 }
 
 const featuredProducts = () => {
-  const db = readItems(); // use helper
+  const db = readItems(); 
   const products = db.products;
 
   console.log(chalk.bold.bgCyan.black("\n FEATURED PRODUCTS \n"));
@@ -109,7 +109,7 @@ function seeAllProducts() {
   const db = readItems();
 
   if (db.products.length === 0) {
-    console.log(chalk.yellow("⚠️ No products found."));
+    console.log(chalk.yellow("No products found."));
   } else {
     console.log(chalk.green("\n All Products:"));
     db.products.forEach((p, index) => {
@@ -131,7 +131,7 @@ function editProduct() {
   rl.question("Enter product ID to edit: ", (id) => {
     const product = db.products.find((p) => p.id == id);
     if (!product) {
-      console.log(chalk.red("❌ Product not found."));
+      console.log(chalk.red("Product not found."));
       return adminMenu();
     }
 
@@ -240,7 +240,7 @@ function seeSingleProduct() {
     const product = db.products.find((p) => p.id == id);
 
     if (!product) {
-      console.log(chalk.red("❌ Product not found."));
+      console.log(chalk.red("Product not found."));
       return shopMenu();
     }
 
@@ -265,7 +265,7 @@ function buyProduct() {
     const product = db.products.find((p) => p.id == id);
 
     if (!product) {
-      console.log(chalk.red("❌ Product not found."));
+      console.log(chalk.red("Product not found."));
       return shopMenu();
     }
 
@@ -275,19 +275,19 @@ function buyProduct() {
       qty = parseInt(qty);
 
       if (isNaN(qty) || qty <= 0) {
-        console.log(chalk.red("❌ Invalid quantity."));
+        console.log(chalk.red("Invalid quantity."));
         return shopMenu();
       }
 
       if (qty > product.instock) {
-        console.log(chalk.red("❌ Not enough stock available."));
+        console.log(chalk.red("Not enough stock available."));
         return shopMenu();
       }
 
-      // reduce stock
+      
       product.instock -= qty;
 
-      // create new order
+      
       const orderId = db.orders.length + 1;
       const order = {
         id: orderId,
@@ -305,7 +305,7 @@ function buyProduct() {
 
       const now = new Date().toLocaleString();
 
-      // add notification for current user
+     
       if (currentUser && currentUser.role === "user") {
         const user = db.users.find((u) => u.name === currentUser.name);
         if (user) {
@@ -315,7 +315,7 @@ function buyProduct() {
         }
       }
 
-      // add notification for all admins
+     
       db.users
         .filter((u) => u.role === "admin")
         .forEach((admin) => {
@@ -342,7 +342,7 @@ function seeProductsBought() {
   const db = readItems();
 
   if (!currentUser || currentUser.role !== "user") {
-    console.log(chalk.red("❌ Only users can see their purchased products."));
+    console.log(chalk.red("Only users can see their purchased products."));
     return shopMenu();
   }
 
@@ -371,7 +371,7 @@ function searchOrder() {
   const db = readItems();
 
   if (!currentUser || currentUser.role !== "user") {
-    console.log(chalk.red("❌ Only users can search their orders."));
+    console.log(chalk.red("Only users can search their orders."));
     return shopMenu();
   }
 
@@ -381,7 +381,7 @@ function searchOrder() {
     );
 
     if (!order) {
-      console.log(chalk.yellow("⚠️ No order found with that ID."));
+      console.log(chalk.yellow("No order found with that ID."));
     } else {
       console.log(chalk.bold.bgMagenta.white("\n ORDER DETAILS \n"));
       console.log(`Order ID: ${order.id}`);
@@ -420,18 +420,18 @@ function login() {
         );
 
         if (!user) {
-          console.log(chalk.red("❌ Invalid login. Try again."));
-          return login(); // retry
+          console.log(chalk.red("Invalid login. Try again."));
+          return login();
         }
 
         
         if (choice.trim() === "1" && user.role !== "admin") {
-          console.log(chalk.red("❌ You are not registered as an admin."));
-          return login(); // go back to login
+          console.log(chalk.red("You are not registered as an admin."));
+          return login(); 
         }
         if (choice.trim() === "2" && user.role !== "user") {
-          console.log(chalk.red("❌ You are not registered as a user."));
-          return login(); // go back to login
+          console.log(chalk.red("You are not registered as a user."));
+          return login(); 
         }
 
         
@@ -459,7 +459,7 @@ function login() {
 
 // ===  Menu ===
 function menu() {
-    console.log(chalk.cyan.bgWhite("WELCOME TO THE BEST SHOP"));
+    console.log(chalk.black.bgWhite("WELCOME TO THE BEST SHOP"));
 
     featuredProducts()
     
@@ -563,7 +563,8 @@ function adminMenu() {
 3: Edit a product
 4: See all orders
 5: Process an order
-6: Exit
+6: See notification
+7: Exit
   `)
   );
 
@@ -584,7 +585,10 @@ function adminMenu() {
       case "5":
         processOrder();
         break;
-      case "6":
+         case "6":
+        seeNotifications();
+        break;
+      case "7":
         console.log(chalk.green("Goodbye!"));
         rl.close();
         break;

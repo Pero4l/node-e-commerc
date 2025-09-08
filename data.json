@@ -79,7 +79,7 @@
       "quantity": 4,
       "price": "$50",
       "total": 200,
-      "status": "pending",
+      "status": "processed",
       "buyer": "ptb",
       "date": "2025-09-07T11:00:34.591Z"
     }
