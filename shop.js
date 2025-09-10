@@ -35,7 +35,7 @@ const featuredProducts = () => {
 
   console.log(chalk.bold.bgCyan.black("\n FEATURED PRODUCTS \n"));
 
-  console.log(
+  console.table(
     chalk.bold.magenta("ID".padEnd(5)) +
     chalk.bold.blue("Name".padEnd(25)) +
     chalk.bold.blue("Price".padEnd(25)) +
@@ -47,7 +47,7 @@ const featuredProducts = () => {
   const pageItems = products.slice(0, 10);
 
   pageItems.forEach((p) => {
-    console.log(
+    console.table(
       chalk.magenta(String(p.id).padEnd(5)) +
       chalk.blue(p.name.padEnd(25)) +
       chalk.red(p.price.padEnd(25)) +
@@ -599,6 +599,8 @@ function adminMenu() {
   });
 }
 
-// Start App
-// adminMenu();
+
 menu()
+
+
+module.exports = { menu };
